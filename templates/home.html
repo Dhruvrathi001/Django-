@@ -1,0 +1,458 @@
+{% extends "base.html" %}
+
+{% block title %}HOME{% endblock title %}
+
+{% block body %}
+<style>
+    /* Your Django-specific styles - these will be inside the body */
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+
+    .container {
+        max-width: 1280px;
+        margin: 0 auto;
+        padding: 0 1.5rem;
+    }
+
+    /* header / hero */
+    .hero {
+        background: linear-gradient(135deg, #0c2d2e 0%, #1b4f3b 100%);
+        color: white;
+        padding: 3rem 0 4rem 0;
+        border-bottom: 6px solid #44b78b;
+        margin-top: 0;
+    }
+
+    .hero-content {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        justify-content: space-between;
+        gap: 2rem;
+    }
+
+    .hero-text {
+        flex: 2;
+    }
+
+    .hero-logo {
+        flex: 1;
+        text-align: center;
+        background: rgba(255,255,255,0.05);
+        border-radius: 48px;
+        padding: 1rem;
+        backdrop-filter: blur(2px);
+    }
+
+    .hero h1 {
+        font-size: 3.2rem;
+        font-weight: 700;
+        letter-spacing: -0.02em;
+        margin-bottom: 1rem;
+    }
+
+    .hero .tagline {
+        font-size: 1.3rem;
+        opacity: 0.9;
+        margin-bottom: 1.5rem;
+        font-weight: 400;
+        border-left: 4px solid #44b78b;
+        padding-left: 1rem;
+    }
+
+    .hero p {
+        font-size: 1.1rem;
+        max-width: 90%;
+        opacity: 0.92;
+    }
+
+    .django-badge {
+        font-size: 4rem;
+        font-weight: 800;
+        background: #fff;
+        color: #0c4e3a;
+        display: inline-block;
+        width: 100px;
+        height: 100px;
+        line-height: 100px;
+        border-radius: 30px;
+        box-shadow: 0 15px 30px rgba(0,0,0,0.2);
+        margin-bottom: 0.5rem;
+    }
+
+    /* section styling */
+    .section {
+        padding: 4rem 0;
+        border-bottom: 1px solid #e2e8f0;
+    }
+
+    .section:last-child {
+        border-bottom: none;
+    }
+
+    .section-title {
+        font-size: 2rem;
+        font-weight: 700;
+        margin-bottom: 2rem;
+        position: relative;
+        display: inline-block;
+    }
+    .section-title:after {
+        content: '';
+        position: absolute;
+        bottom: -10px;
+        left: 0;
+        width: 60%;
+        height: 4px;
+        background: #44b78b;
+        border-radius: 4px;
+    }
+
+    /* cards grid */
+    .features-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 2rem;
+        margin-top: 1rem;
+    }
+
+    .feature-card {
+        background: white;
+        border-radius: 1.5rem;
+        padding: 1.8rem;
+        box-shadow: 0 8px 20px rgba(0,0,0,0.03);
+        transition: transform 0.2s ease, box-shadow 0.2s ease;
+        border: 1px solid #eef2f6;
+    }
+
+    .feature-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 20px 30px -12px rgba(0,0,0,0.1);
+        border-color: #cbd5e1;
+    }
+
+    .feature-icon {
+        font-size: 2.4rem;
+        margin-bottom: 1rem;
+    }
+
+    .feature-card h3 {
+        font-size: 1.5rem;
+        margin-bottom: 0.75rem;
+        color: #0f3b2c;
+    }
+
+    /* history layout */
+    .history-grid {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 2rem;
+        background: white;
+        border-radius: 2rem;
+        padding: 2rem;
+        box-shadow: 0 8px 24px rgba(0,0,0,0.05);
+    }
+
+    .history-text {
+        flex: 2;
+    }
+
+    .history-milestones {
+        flex: 1;
+        background: #f8fafc;
+        border-radius: 1.5rem;
+        padding: 1.5rem;
+        border-left: 4px solid #44b78b;
+    }
+
+    .milestone-item {
+        margin-bottom: 1rem;
+        padding-bottom: 0.8rem;
+        border-bottom: 1px dashed #cbd5e1;
+    }
+    .milestone-year {
+        font-weight: 800;
+        color: #1e6f5c;
+        display: inline-block;
+        width: 70px;
+    }
+
+    /* why useful section */
+    .useful-container {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 2rem;
+    }
+    .useful-box {
+        background: #ffffff;
+        border-radius: 1.5rem;
+        padding: 1.6rem;
+        flex: 1;
+        box-shadow: 0 5px 12px rgba(0,0,0,0.03);
+        border: 1px solid #e9edf2;
+    }
+
+    .useful-box h3 {
+        margin-bottom: 1rem;
+        color: #0b3b2e;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+    }
+
+    /* insights row */
+    .insights-wrap {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+        gap: 1.8rem;
+    }
+    .insight-card {
+        background: #fefce8;
+        border-radius: 1.2rem;
+        padding: 1.5rem;
+        border-bottom: 3px solid #eab308;
+        transition: all 0.2s;
+    }
+    .insight-card p {
+        font-size: 0.98rem;
+    }
+    .insight-card strong {
+        color: #a16207;
+    }
+
+    /* quote / cta */
+    .cta-block {
+        background: #0f2c24;
+        color: white;
+        text-align: center;
+        border-radius: 2rem;
+        padding: 2.5rem;
+        margin-top: 1rem;
+    }
+    .cta-block a {
+        display: inline-block;
+        background: #44b78b;
+        color: #0a2a21;
+        text-decoration: none;
+        font-weight: 600;
+        padding: 0.8rem 2rem;
+        border-radius: 40px;
+        margin-top: 1rem;
+        transition: background 0.2s;
+    }
+    .cta-block a:hover {
+        background: #5fcf9f;
+    }
+
+    footer {
+        background: #eef2f6;
+        padding: 2rem 0;
+        text-align: center;
+        color: #475569;
+        font-size: 0.9rem;
+        margin-top: 2rem;
+    }
+
+    @media (max-width: 760px) {
+        .hero h1 { font-size: 2.3rem; }
+        .hero p { max-width: 100%; }
+        .hero .tagline { font-size: 1rem; }
+        .section { padding: 2.5rem 0; }
+        .history-grid { flex-direction: column; }
+    }
+</style>
+
+<!-- Your Django content starts here - NO html/head/body tags -->
+<header class="hero">
+    <div class="container hero-content">
+        <div class="hero-text">
+            <h1>Django</h1>
+            <h4>{{variable}}</h4>
+            <div class="tagline">The web framework for perfectionists with deadlines.</div>
+            <p>High-level Python web framework that encourages rapid development, clean pragmatic design, and "batteries-included" philosophy. Used by Instagram, Pinterest, Spotify, and thousands of startups.</p>
+        </div>
+        <div class="hero-logo">
+            <div class="django-badge">🐍</div>
+            <div style="font-weight:500; margin-top:8px;">Django ✨</div>
+            <div style="font-size:0.8rem; opacity:0.8;">BSD licensed</div>
+        </div>
+    </div>
+</header>
+
+<main>
+    <!-- FEATURE SECTION : CORE FEATURES -->
+    <section class="section">
+        <div class="container">
+            <h2 class="section-title">⚡ Key features that make Django exceptional</h2>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">🧩</div>
+                    <h3>Batteries included</h3>
+                    <p>Built-in admin interface, authentication, ORM, migrations, forms, and security layers — no need to reinvent the wheel.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🔒</div>
+                    <h3>Security first</h3>
+                    <p>Protects against CSRF, XSS, SQL injection, clickjacking, and hosts secure session handling by default.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🚀</div>
+                    <h3>Rapid development</h3>
+                    <p>DRY (Don't Repeat Yourself) principle, reusable apps, and clean URL design accelerate delivery.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🌍</div>
+                    <h3>Scalable & versatile</h3>
+                    <p>From content management systems to high‑load social platforms, Django scales with ease using caching and async support.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🛠️</div>
+                    <h3>ORM Mastery</h3>
+                    <p>Object-relational mapper that works with PostgreSQL, MySQL, SQLite, Oracle. Complex queries made simple.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">📦</div>
+                    <h3>Reusable apps</h3>
+                    <p>Modular architecture: pluggable apps like REST framework, CMS, e‑commerce, and thousands of packages.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- HISTORY + ORIGINS -->
+    <section class="section">
+        <div class="container">
+            <h2 class="section-title">📜 History & evolution</h2>
+            <div class="history-grid">
+                <div class="history-text">
+                    <p style="margin-bottom:1rem; font-size:1.05rem;"><strong>Born in a newsroom</strong> — Django was created in 2003 by web developers Adrian Holovaty and Simon Willison at the <strong>Lawrence Journal-World</strong> newspaper. They needed a framework to build data‑driven web applications quickly while respecting journalistic deadlines. In 2005, they released the framework as open source under the BSD license, naming it after the jazz guitarist Django Reinhardt.</p>
+                    <p style="margin-top:1rem;">Since then, the Django Software Foundation (DSF) has guided its evolution. Major releases introduced features like <strong>ORM improvements, class‑based views, migrations, async views, and Python 3.10+ compatibility</strong>. Today, Django powers some of the most visited sites on the web and remains the #1 choice for Python backend development.</p>
+                    <p style="margin-top:1rem; background:#eff6ff; padding:0.6rem 1rem; border-radius:1rem;">🌱 <strong>Current stable:</strong> Django 5.0+ (2024) includes enhanced form rendering, database computed fields, and deeper async ORM support.</p>
+                </div>
+                <div class="history-milestones">
+                    <h3 style="margin-bottom:1.2rem;">🏆 Milestones</h3>
+                    <div class="milestone-item"><span class="milestone-year">2005</span> First public release (0.90)</div>
+                    <div class="milestone-item"><span class="milestone-year">2008</span> Django 1.0 — stable API</div>
+                    <div class="milestone-item"><span class="milestone-year">2017</span> Django 2.0 — simpler URL routing, mobile friendly admin</div>
+                    <div class="milestone-item"><span class="milestone-year">2020</span> Django 3.0 — async support</div>
+                    <div class="milestone-item"><span class="milestone-year">2023</span> Django 5.0 — field group templates, async ORM</div>
+                    <div class="milestone-item"><span class="milestone-year">2025+</span> Growing async ecosystem & HTMX integration</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- WHY DJANGO IS USEFUL -->
+    <section class="section">
+        <div class="container">
+            <h2 class="section-title">💡 Why Django is useful (real‑world advantages)</h2>
+            <div class="useful-container">
+                <div class="useful-box">
+                    <h3>⚙️ For startups & MVPs</h3>
+                    <p>Django slashes time‑to‑market. Out‑of‑the‑box user auth, admin panel, and database migrations allow a solo developer to launch a production-grade app in days, not weeks.</p>
+                </div>
+                <div class="useful-box">
+                    <h3>🏢 For enterprises</h3>
+                    <p>Robust security, mature ecosystem, and deep integration with enterprise databases and authentication (LDAP, SSO, OAuth). Used by National Geographic, The Washington Post, and Mozilla.</p>
+                </div>
+                <div class="useful-box">
+                    <h3>📊 Data-driven & CMS</h3>
+                    <p>Django's admin auto-generation makes it ideal for internal tools, data dashboards, and content management (Wagtail CMS built on Django).</p>
+                </div>
+                <div class="useful-box">
+                    <h3>🧪 Testing & maintainability</h3>
+                    <p>Integrated test framework encourages high test coverage, plus explicit design patterns make long‑term maintenance cheaper.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- USEFUL INSIGHTS -->
+    <section class="section">
+        <div class="container">
+            <h2 class="section-title">🧠 Pro insights & hidden gems</h2>
+            <div class="insights-wrap">
+                <div class="insight-card">
+                    <strong>🔁 DRY principle is law</strong>
+                    <p>Django's generic views, mixins, and template inheritance reduce duplication dramatically. Pro tip: Use class-based views with mixins for clean code.</p>
+                </div>
+                <div class="insight-card">
+                    <strong>⚡ Django + HTMX = modern SPA without JS frameworks</strong>
+                    <p>Combine Django templates with HTMX for dynamic interfaces without writing client-side heavy React/Vue. Simplicity meets interactivity.</p>
+                </div>
+                <div class="insight-card">
+                    <strong>🗄️ Database optimization tricks</strong>
+                    <p>Use <code>select_related()</code> and <code>prefetch_related()</code> to slash query counts by 90%. Also, Django Debug Toolbar is your best friend.</p>
+                </div>
+                <div class="insight-card">
+                    <strong>🔐 Built‑in protections that matter</strong>
+                    <p>Automatic escaping in templates, CSRF tokens, and clickjacking protection — many "forgotten" security defaults save thousands of vulnerabilities.</p>
+                </div>
+                <div class="insight-card">
+                    <strong>🏗️ Third‑party ecosystem power</strong>
+                    <p>django-rest-framework (DRF) for APIs, Celery for background tasks, Channels for WebSockets — Django extends beyond monoliths.</p>
+                </div>
+                <div class="insight-card">
+                    <strong>📈 Used by giants you trust</strong>
+                    <p>Instagram (billions of users), Spotify (web backend components), YouTube (some legacy tools), Pinterest, Dropbox, Eventbrite, and The Onion.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- COMPARISON INSIGHT -->
+    <section class="section">
+        <div class="container">
+            <div style="background: #eef2ff; border-radius: 1.5rem; padding: 1.8rem;">
+                <div style="display: flex; flex-wrap: wrap; gap: 1rem; align-items: center; justify-content: space-between;">
+                    <div>
+                        <h3 style="font-size:1.5rem; margin-bottom:0.5rem;">🌱 Django vs other frameworks?</h3>
+                        <p>Unlike Flask / FastAPI (micro-frameworks), Django gives you everything built-in — ideal for full-stack applications. Compared to Rails (Ruby), Django offers Python's readability and scientific stack. Performance? With caching, async ORM, and database optimization, it handles millions of requests/day.</p>
+                    </div>
+                    <div style="background:#ffffffb3; border-radius: 1rem; padding: 1rem; min-width: 180px;">
+                        <div><strong>⭐ Why choose Django?</strong></div>
+                        <div>✅ Mature admin</div>
+                        <div>✅ 15+ years of production hardening</div>
+                        <div>✅ Largest Python web ecosystem</div>
+                        <div>✅ Thriving community (DSF)</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- COMMUNITY CTA -->
+    <section class="section">
+        <div class="container">
+            <div class="cta-block">
+                <h2 style="font-size: 1.9rem;">🚀 Join the Django community</h2>
+                <p style="margin-top: 0.5rem; max-width: 700px; margin-left: auto; margin-right: auto;">Thousands of contributors, over 4,500 packages on PyPI labeled "Django", and official documentation that is one of the best in open source. Start your next project with confidence.</p>
+                <a href="https://www.djangoproject.com/" target="_blank">📖 Explore Official Docs →</a>
+                <p style="margin-top: 1.2rem; font-size: 0.85rem; opacity: 0.7;">⭐ Insight: Django's "class-based views" and "generic editing views" reduce boilerplate. For production, use environment variables, whitenoise for static files, and Gunicorn + Nginx.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- QUICK STATS -->
+    <section class="section" style="padding-top: 0;">
+        <div class="container">
+            <div style="display: flex; flex-wrap: wrap; gap: 1rem; justify-content: space-between; background: white; border-radius: 1.5rem; padding: 1.5rem; box-shadow: 0 2px 8px rgba(0,0,0,0.02);">
+                <div style="flex:1;"><strong>📅 Long-term support (LTS)</strong><br> Security & data updates for 3+ years — enterprise friendly.</div>
+                <div style="flex:1;"><strong>🌍 Multilingual ready</strong><br> Built-in i18n, l10n, timezone support for global apps.</div>
+                <div style="flex:1;"><strong>🧪 Unittest + pytest</strong><br> Full test client to simulate requests, forms, and views.</div>
+                <div style="flex:1;"><strong>📡 REST & GraphQL</strong><br> Use DRF + graphene-django to serve modern APIs.</div>
+            </div>
+        </div>
+    </section>
+</main>
+
+<footer>
+    <div class="container">
+        <p>Django is a registered trademark of the Django Software Foundation. This page is a showcase of its capabilities — created for educational inspiration. 🐍✨</p>
+        <p style="margin-top: 0.7rem;">💡 Useful insight: "Django's development server auto-reloads on code changes — perfect for rapid iteration. And never forget: <strong>DEBUG=False</strong> in production!</p>
+    </div>
+</footer>
+{% endblock body %}

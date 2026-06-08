@@ -1,0 +1,215 @@
+{% extends "base.html" %}
+
+{% block title %}Contact{% endblock title %}
+
+{% block body %}
+<style>
+    .contact-header {
+        background: linear-gradient(135deg, #1e3c32 0%, #2a5a48 100%);
+        color: white;
+        padding: 3rem 0;
+        margin-bottom: 2rem;
+    }
+    
+    .contact-info-card {
+        background: #f8f9fa;
+        border-radius: 10px;
+        padding: 1.5rem;
+        margin-bottom: 1.5rem;
+        transition: transform 0.3s ease;
+        height: auto;
+    }
+    
+    .contact-info-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    }
+    
+    .contact-icon {
+        font-size: 2.5rem;
+        margin-bottom: 1rem;
+        color: #44b78b;
+    }
+    
+    .contact-form {
+        background: white;
+        padding: 2rem;
+        border-radius: 10px;
+        box-shadow: 0 0 20px rgba(0,0,0,0.05);
+    }
+    
+    .form-control:focus {
+        border-color: #44b78b;
+        box-shadow: 0 0 0 0.2rem rgba(68, 183, 139, 0.25);
+    }
+    
+    .btn-submit {
+        background-color: #44b78b;
+        border: none;
+        padding: 0.75rem 2rem;
+        font-weight: 600;
+    }
+    
+    .btn-submit:hover {
+        background-color: #359d74;
+    }
+    
+    .social-link {
+        display: inline-block;
+        width: 45px;
+        height: 45px;
+        line-height: 45px;
+        text-align: center;
+        background: #f0f0f0;
+        border-radius: 50%;
+        margin: 0 5px;
+        transition: all 0.3s ease;
+        color: #333;
+        text-decoration: none;
+    }
+    
+    .social-link:hover {
+        background: #44b78b;
+        color: white;
+        transform: translateY(-3px);
+    }
+    
+    .faq-item {
+        border-bottom: 1px solid #eee;
+        padding: 1rem 0;
+        cursor: pointer;
+    }
+    
+    .faq-question {
+        font-weight: 600;
+        margin-bottom: 0.5rem;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+    
+    .faq-answer {
+        display: none;
+        padding-top: 0.5rem;
+        color: #666;
+    }
+    
+    .faq-item.active .faq-answer {
+        display: block;
+    }
+</style>
+
+<div class="contact-header">
+    <div class="container">
+        <h1>📬 Contact Us</h1>
+        <p class="lead mt-3">Get in touch with the Django community or reach out to us directly</p>
+    </div>
+</div>
+
+<div class="container mb-5">
+    <div class="row">
+        <!-- Contact Information -->
+        <div class="col-md-5">
+            <h3 class="mb-4">Get in Touch</h3>
+            
+            <div class="contact-info-card">
+                <div class="contact-icon">📍</div>
+                <h5>Our Location</h5>
+                <p>Django Software Foundation<br>
+                Lawrence, Kansas, USA<br>
+                (Virtual organization with global presence)</p>
+            </div>
+            
+            <div class="contact-info-card">
+                <div class="contact-icon">📧</div>
+                <h5>Email Us</h5>
+                <p><strong>General Inquiries:</strong> <a href="mailto:hello@djangoproject.com">hello@djangoproject.com</a><br>
+                <strong>Security Issues:</strong> <a href="mailto:security@djangoproject.com">security@djangoproject.com</a><br>
+                <strong>Foundation:</strong> <a href="mailto:foundation@djangoproject.com">foundation@djangoproject.com</a></p>
+            </div>
+            
+            <div class="contact-info-card">
+                <div class="contact-icon">💬</div>
+                <h5>Community Channels</h5>
+                <p><strong>Discord:</strong> django-community<br>
+                <strong>IRC:</strong> #django on Libera.Chat<br>
+                <strong>Forum:</strong> forum.djangoproject.com</p>
+            </div>
+            
+            <div class="contact-info-card">
+                <div class="contact-icon">🌐</div>
+                <h5>Follow Us</h5>
+                <div class="mt-2">
+                    <a href="https://github.com/django" class="social-link" target="_blank">🐙</a>
+                    <a href="https://twitter.com/djangoproject" class="social-link" target="_blank">𝕏</a>
+                    <a href="https://www.youtube.com/c/DjangoProject" class="social-link" target="_blank">▶️</a>
+                    <a href="https://www.linkedin.com/company/django-software-foundation/" class="social-link" target="_blank">🔗</a>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Contact Form -->
+        <div class="col-md-7">
+            <h3 class="mb-4">Send us a Message</h3>
+            <div class="contact-form">
+                <form method="post" action="/contact">
+                    {% csrf_token %}
+                    <div class="mb-3">
+                        <label for="name" class="form-label">Full Name *</label>
+                        <input type="text" class="form-control" id="name" required>
+                    </div>
+                    
+                    <div class="mb-3">
+                        <label for="email" class="form-label">Email Address *</label>
+                        <input type="email" class="form-control" id="email" required>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="phone" class="form-label">Phone Number *</label>
+                        <input type="tel" class="form-control" id="phone" required>
+                    </div>
+                    
+                    <div class="mb-3">
+                        <label for="subject" class="form-label">Subject *</label>
+                        <select class="form-select" id="subject" required>
+                            <option value="">Select a subject...</option>
+                            <option>General Inquiry</option>
+                            <option>Technical Support</option>
+                            <option>Bug Report</option>
+                            <option>Feature Request</option>
+                            <option>Contributor Question</option>
+                            <option>Sponsorship</option>
+                        </select>
+                    </div>
+                    
+                    <div class="mb-3">
+                        <label for="message" class="form-label">Message *</label>
+                        <textarea class="form-control" id="message" rows="5" required></textarea>
+                    </div>
+                    
+                    <div class="mb-3 form-check">
+                        <input type="checkbox" class="form-check-input" id="newsletter">
+                        <label class="form-check-label" for="newsletter">
+                            Subscribe to Django newsletter
+                        </label>
+                    </div>
+                    
+                    <button type="submit" class="btn btn-submit text-white w-100">
+                        Send Message ✉️
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    // Simple FAQ toggle
+    document.querySelectorAll('.faq-item').forEach(item => {
+        item.addEventListener('click', () => {
+            item.classList.toggle('active');
+        });
+    });
+</script>
+
+{% endblock body %}

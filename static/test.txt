@@ -1,0 +1,2 @@
+This is Static text file which is stored in static folder
+ 

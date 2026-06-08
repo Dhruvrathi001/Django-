@@ -1,0 +1,338 @@
+{% extends "base.html" %}
+
+{% block title %}About Django{% endblock title %}
+
+{% block body %}
+
+<style>
+    /* Carousel height fix */
+    .carousel-item {
+        height: 500px;
+        background: #000;
+    }
+    
+    .carousel-item img {
+        height: 100%;
+        width: 100%;
+        object-fit: cover;
+        object-position: center;
+    }
+    
+    .carousel-caption {
+        background: rgba(0,0,0,0.6);
+        border-radius: 10px;
+        padding: 20px;
+        bottom: 20%;
+    }
+    
+    .carousel-caption h5,
+    .carousel-caption p {
+        color: #fff;
+        text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
+    }
+    
+    .about-hero {
+        background: linear-gradient(135deg, #0c4e3a 0%, #1b6b50 100%);
+        color: white;
+        padding: 4rem 0;
+        margin-bottom: 2rem;
+    }
+    
+    .about-section {
+        padding: 3rem 0;
+        border-bottom: 1px solid #e0e0e0;
+    }
+    
+    .about-section:last-child {
+        border-bottom: none;
+    }
+    
+    .mission-box {
+        background: #f8f9fa;
+        border-left: 4px solid #44b78b;
+        padding: 2rem;
+        border-radius: 10px;
+        margin: 2rem 0;
+    }
+    
+    .team-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 2rem;
+        margin-top: 2rem;
+    }
+    
+    .team-card {
+        background: white;
+        border-radius: 10px;
+        padding: 1.5rem;
+        text-align: center;
+        box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        transition: transform 0.3s ease;
+    }
+    
+    .team-card:hover {
+        transform: translateY(-5px);
+    }
+    
+    .team-icon {
+        font-size: 3rem;
+        margin-bottom: 1rem;
+    }
+    
+    .stats-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 2rem;
+        margin: 2rem 0;
+        text-align: center;
+    }
+    
+    .stat-number {
+        font-size: 2.5rem;
+        font-weight: bold;
+        color: #0c4e3a;
+    }
+    
+    .principles-list {
+        list-style: none;
+        padding: 0;
+    }
+    
+    .principles-list li {
+        padding: 0.8rem 0;
+        border-bottom: 1px solid #eee;
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+    }
+    
+    .principle-icon {
+        font-size: 1.5rem;
+    }
+    
+    @media (max-width: 768px) {
+        .carousel-item {
+            height: 300px;
+        }
+        
+        .carousel-caption {
+            bottom: 10%;
+            padding: 10px;
+        }
+        
+        .carousel-caption h5 {
+            font-size: 1rem;
+        }
+        
+        .carousel-caption p {
+            font-size: 0.8rem;
+        }
+        
+        .about-hero h1 {
+            font-size: 2rem;
+        }
+    }
+</style>
+
+<!-- Carousel Section -->
+<div id="carouselExampleDark" class="carousel carousel-dark slide" data-bs-ride="carousel">
+    <div class="carousel-indicators">
+        <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+        <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="1" aria-label="Slide 2"></button>
+        <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="2" aria-label="Slide 3"></button>
+    </div>
+    <div class="carousel-inner">
+        <div class="carousel-item active" data-bs-interval="5000">
+            {% load static %}
+            <img src="{% static 'img/1.avif' %}" class="d-block w-100" alt="Django Framework">
+            <div class="carousel-caption d-none d-md-block">
+                <h5>Welcome to Django</h5>
+                <p>The web framework for perfectionists with deadlines</p>
+            </div>
+        </div>
+        <div class="carousel-item" data-bs-interval="5000">
+            <img src="{% static 'img/2.avif' %}" class="d-block w-100" alt="Django Features">
+            <div class="carousel-caption d-none d-md-block">
+                <h5>Batteries Included</h5>
+                <p>Everything you need built right in</p>
+            </div>
+        </div>
+        <div class="carousel-item">
+            <img src="{% static 'img/3.avif' %}" class="d-block w-100" alt="Django Community">
+            <div class="carousel-caption d-none d-md-block">
+                <h5>Secure & Scalable</h5>
+                <p>Trusted by Instagram, Pinterest, and more</p>
+            </div>
+        </div>
+    </div>
+    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleDark" data-bs-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Previous</span>
+    </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleDark" data-bs-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Next</span>
+    </button>
+</div>
+
+<!-- About Hero Section -->
+<div class="about-hero">
+    <div class="container">
+        <h1>About Django Framework</h1>
+        <p class="lead mt-3">The web framework for perfectionists with deadlines — since 2005</p>
+    </div>
+</div>
+
+<div class="container">
+    <!-- Our Story Section -->
+    <div class="about-section">
+        <h2 class="mb-4">📖 Our Story</h2>
+        <div class="row">
+            <div class="col-md-8">
+                <p class="lead">Django was born in the newsroom of the <strong>Lawrence Journal-World</strong> newspaper in Lawrence, Kansas, USA.</p>
+                <p>In 2003, web developers <strong>Adrian Holovaty</strong> and <strong>Simon Willison</strong> started using Python to build numerous journalistic web applications under tight deadlines. They needed a framework that would allow them to build database-driven web applications quickly while maintaining clean, pragmatic design.</p>
+                <p>In 2005, after building several sites, they extracted the reusable components and open-sourced the framework under the BSD license. They named it after the legendary jazz guitarist <strong>Django Reinhardt</strong>.</p>
+                <p>Today, Django is maintained by the <strong>Django Software Foundation (DSF)</strong>, an independent non-profit organization that supports its development, promotes its use, and protects its intellectual property.</p>
+            </div>
+            <div class="col-md-4">
+                <div class="mission-box">
+                    <h4>🎯 Mission</h4>
+                    <p>To make it easier to build better web applications more quickly with less code, while following the "Don't Repeat Yourself" (DRY) principle.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Philosophy Section -->
+    <div class="about-section">
+        <h2 class="mb-4">💭 Django Philosophy</h2>
+        <div class="row">
+            <div class="col-md-6">
+                <h4>Core Principles</h4>
+                <ul class="principles-list">
+                    <li><span class="principle-icon">🔁</span> <strong>DRY (Don't Repeat Yourself):</strong> Every piece of knowledge should have a single, unambiguous representation</li>
+                    <li><span class="principle-icon">🧩</span> <strong>Explicit is Better Than Implicit:</strong> Clean, readable code that's easy to understand</li>
+                    <li><span class="principle-icon">📦</span> <strong>Batteries Included:</strong> Everything you need for web development comes out of the box</li>
+                    <li><span class="principle-icon">🔒</span> <strong>Security by Default:</strong> Built-in protection against common web vulnerabilities</li>
+                    <li><span class="principle-icon">🚀</span> <strong>Rapid Development:</strong> Build applications in hours, not weeks</li>
+                </ul>
+            </div>
+            <div class="col-md-6">
+                <h4>Design Patterns</h4>
+                <ul class="principles-list">
+                    <li><span class="principle-icon">🏗️</span> <strong>MVT Pattern:</strong> Model-View-Template architecture</li>
+                    <li><span class="principle-icon">🔄</span> <strong>Loose Coupling:</strong> Components are independent and reusable</li>
+                    <li><span class="principle-icon">🎨</span> <strong>Don't Touch Other People's Data:</strong> Clear boundaries between components</li>
+                    <li><span class="principle-icon">⚡</span> <strong>Efficiency:</strong> Optimized for performance and scalability</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <!-- Community Stats -->
+    <div class="about-section">
+        <h2 class="mb-4">🌍 Community Impact</h2>
+        <div class="stats-grid">
+            <div>
+                <div class="stat-number">80,000+</div>
+                <p>GitHub Stars</p>
+            </div>
+            <div>
+                <div class="stat-number">9,000+</div>
+                <p>Contributors</p>
+            </div>
+            <div>
+                <div class="stat-number">4,500+</div>
+                <p>Packages on PyPI</p>
+            </div>
+            <div>
+                <div class="stat-number">200+</div>
+                <p>Countries Using Django</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Leadership Team -->
+    <div class="about-section">
+        <h2 class="mb-4">👥 Core Team</h2>
+        <div class="team-grid">
+            <div class="team-card">
+                <div class="team-icon">👨‍💻</div>
+                <h4>Adrian Holovaty</h4>
+                <p>Co-Creator</p>
+                <small>Original developer at LJWorld</small>
+            </div>
+            <div class="team-card">
+                <div class="team-icon">👨‍💻</div>
+                <h4>Simon Willison</h4>
+                <p>Co-Creator</p>
+                <small>Original developer at LJWorld</small>
+            </div>
+            <div class="team-card">
+                <div class="team-icon">🏛️</div>
+                <h4>Django Software Foundation</h4>
+                <p>Governance & Support</p>
+                <small>Non-profit organization</small>
+            </div>
+            <div class="team-card">
+                <div class="team-icon">🌍</div>
+                <h4>Global Community</h4>
+                <p>Contributors Worldwide</p>
+                <small>Django Fellows & Volunteers</small>
+            </div>
+        </div>
+    </div>
+
+    <!-- Companies Section -->
+    <div class="about-section">
+        <h2 class="mb-4">🏢 Trusted By Industry Leaders</h2>
+        <div class="row text-center">
+            <div class="col-md-3 col-6 mb-3">
+                <strong>Instagram</strong>
+            </div>
+            <div class="col-md-3 col-6 mb-3">
+                <strong>Spotify</strong>
+            </div>
+            <div class="col-md-3 col-6 mb-3">
+                <strong>Pinterest</strong>
+            </div>
+            <div class="col-md-3 col-6 mb-3">
+                <strong>Dropbox</strong>
+            </div>
+            <div class="col-md-3 col-6 mb-3">
+                <strong>YouTube</strong>
+            </div>
+            <div class="col-md-3 col-6 mb-3">
+                <strong>Mozilla</strong>
+            </div>
+            <div class="col-md-3 col-6 mb-3">
+                <strong>National Geographic</strong>
+            </div>
+            <div class="col-md-3 col-6 mb-3">
+                <strong>The Washington Post</strong>
+            </div>
+        </div>
+    </div>
+
+    <!-- Version History -->
+    <div class="about-section">
+        <h2 class="mb-4">📅 Version Milestones</h2>
+        <div class="table-responsive">
+            <table class="table table-hover">
+                <thead>
+                    <tr><th>Version</th><th>Release Date</th><th>Key Features</th></tr>
+                </thead>
+                <tbody>
+                    <tr><td><strong>5.0</strong></td><td>Dec 2023</td><td>Field group templates, async ORM, database computed fields</td></tr>
+                    <tr><td><strong>4.0</strong></td><td>Dec 2021</td><td>Redis cache backend, new template engine features</td></tr>
+                    <tr><td><strong>3.0</strong></td><td>Dec 2019</td><td>Async support, MariaDB support</td></tr>
+                    <tr><td><strong>2.0</strong></td><td>Dec 2017</td><td>Simplified URL routing, mobile-friendly admin</td></tr>
+                    <tr><td><strong>1.0</strong></td><td>Sep 2008</td><td>First stable release</td></tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+{% endblock body %}

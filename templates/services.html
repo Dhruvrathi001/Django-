@@ -1,0 +1,329 @@
+{% extends "base.html" %}
+
+{% block title %}Services{% endblock title %}
+
+{% block body %}
+<style>
+    .services-hero {
+        background: linear-gradient(135deg, #2c5f4a 0%, #1a4638 100%);
+        color: white;
+        padding: 4rem 0;
+        margin-bottom: 2rem;
+    }
+    
+    .service-card {
+        background: white;
+        border-radius: 12px;
+        overflow: hidden;
+        box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        margin-bottom: 2rem;
+        transition: transform 0.3s ease;
+        height: 100%;
+    }
+    
+    .service-card:hover {
+        transform: translateY(-8px);
+        box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+    }
+    
+    .service-icon {
+        font-size: 3rem;
+        padding: 2rem;
+        text-align: center;
+        background: linear-gradient(135deg, #e8f5e9 0%, #c8e6d9 100%);
+    }
+    
+    .service-body {
+        padding: 1.5rem;
+    }
+    
+    .service-body h3 {
+        color: #0c4e3a;
+        margin-bottom: 1rem;
+    }
+    
+    .price-tag {
+        font-size: 1.8rem;
+        font-weight: bold;
+        color: #44b78b;
+        margin: 1rem 0;
+    }
+    
+    .feature-list {
+        list-style: none;
+        padding: 0;
+    }
+    
+    .feature-list li {
+        padding: 0.5rem 0;
+        border-bottom: 1px solid #eee;
+    }
+    
+    .feature-list li:before {
+        content: "✓";
+        color: #44b78b;
+        font-weight: bold;
+        margin-right: 10px;
+    }
+    
+    .process-step {
+        text-align: center;
+        padding: 1rem;
+    }
+    
+    .step-number {
+        width: 50px;
+        height: 50px;
+        background: #44b78b;
+        color: white;
+        border-radius: 50%;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.5rem;
+        font-weight: bold;
+        margin-bottom: 1rem;
+    }
+    
+    .testimonial-card {
+        background: #f8f9fa;
+        padding: 2rem;
+        border-radius: 10px;
+        margin: 1rem 0;
+        border-left: 4px solid #44b78b;
+    }
+    
+    .testimonial-text {
+        font-style: italic;
+        margin-bottom: 1rem;
+    }
+    
+    .testimonial-author {
+        font-weight: bold;
+        color: #0c4e3a;
+    }
+    
+    @media (max-width: 768px) {
+        .services-hero h1 {
+            font-size: 2rem;
+        }
+    }
+</style>
+
+<div class="services-hero">
+    <div class="container">
+        <h1>🚀 Django Development Services</h1>
+        <p class="lead mt-3">Professional solutions for building powerful, scalable web applications</p>
+    </div>
+</div>
+
+<div class="container">
+    <!-- Services Overview -->
+    <div class="row mb-5">
+        <div class="col-12">
+            <h2 class="text-center mb-4">What We Offer</h2>
+            <p class="text-center lead">End-to-end Django development services tailored to your business needs</p>
+        </div>
+    </div>
+    
+    <div class="row">
+        <div class="col-md-4">
+            <div class="service-card">
+                <div class="service-icon">
+                    🌐
+                </div>
+                <div class="service-body">
+                    <h3>Web Application Development</h3>
+                    <p>Custom web apps built with Django's robust framework, from simple CRUD applications to complex enterprise systems.</p>
+                    <div class="price-tag">Custom Quote</div>
+                    <ul class="feature-list">
+                        <li>Full-stack development</li>
+                        <li>REST API integration</li>
+                        <li>Database design & optimization</li>
+                        <li>User authentication & authorization</li>
+                        <li>Admin panel customization</li>
+                    </ul>
+                    <button class="btn btn-outline-success w-100 mt-3">Learn More →</button>
+                </div>
+            </div>
+        </div>
+        
+        <div class="col-md-4">
+            <div class="service-card">
+                <div class="service-icon">
+                    📱
+                </div>
+                <div class="service-body">
+                    <h3>API Development (DRF)</h3>
+                    <p>Build powerful RESTful APIs using Django REST Framework for mobile apps, SPAs, and third-party integrations.</p>
+                    <div class="price-tag">Starting at $2,500</div>
+                    <ul class="feature-list">
+                        <li>RESTful API design</li>
+                        <li>GraphQL with Graphene</li>
+                        <li>Authentication (JWT, OAuth)</li>
+                        <li>API documentation (Swagger)</li>
+                        <li>Rate limiting & caching</li>
+                    </ul>
+                    <button class="btn btn-outline-success w-100 mt-3">Learn More →</button>
+                </div>
+            </div>
+        </div>
+        
+        <div class="col-md-4">
+            <div class="service-card">
+                <div class="service-icon">
+                    🔧
+                </div>
+                <div class="service-body">
+                    <h3>Django Maintenance & Support</h3>
+                    <p>Keep your Django applications secure, updated, and running smoothly with our maintenance packages.</p>
+                    <div class="price-tag">$500/month</div>
+                    <ul class="feature-list">
+                        <li>Security updates & patches</li>
+                        <li>Performance monitoring</li>
+                        <li>Bug fixes & troubleshooting</li>
+                        <li>Dependency updates</li>
+                        <li>24/7 emergency support</li>
+                    </ul>
+                    <button class="btn btn-outline-success w-100 mt-3">Learn More →</button>
+                </div>
+            </div>
+        </div>
+        
+        <div class="col-md-4">
+            <div class="service-card">
+                <div class="service-icon">
+                    🚢
+                </div>
+                <div class="service-body">
+                    <h3>Deployment & DevOps</h3>
+                    <p>Professional deployment and server management for Django applications on various platforms.</p>
+                    <div class="price-tag">Custom Quote</div>
+                    <ul class="feature-list">
+                        <li>AWS/Azure/GCP deployment</li>
+                        <li>Docker containerization</li>
+                        <li>CI/CD pipeline setup</li>
+                        <li>Load balancing & scaling</li>
+                        <li>Database migration</li>
+                    </ul>
+                    <button class="btn btn-outline-success w-100 mt-3">Learn More →</button>
+                </div>
+            </div>
+        </div>
+        
+        <div class="col-md-4">
+            <div class="service-card">
+                <div class="service-icon">
+                    📊
+                </div>
+                <div class="service-body">
+                    <h3>E-commerce Solutions</h3>
+                    <p>Build secure, feature-rich online stores using Django's powerful e-commerce frameworks.</p>
+                    <div class="price-tag">Starting at $5,000</div>
+                    <ul class="feature-list">
+                        <li>Product catalog management</li>
+                        <li>Shopping cart & checkout</li>
+                        <li>Payment gateway integration</li>
+                        <li>Order management system</li>
+                        <li>Inventory tracking</li>
+                    </ul>
+                    <button class="btn btn-outline-success w-100 mt-3">Learn More →</button>
+                </div>
+            </div>
+        </div>
+        
+        <div class="col-md-4">
+            <div class="service-card">
+                <div class="service-icon">
+                    📈
+                </div>
+                <div class="service-body">
+                    <h3>CMS Development</h3>
+                    <p>Custom content management systems using Django's admin interface and Wagtail CMS.</p>
+                    <div class="price-tag">Custom Quote</div>
+                    <ul class="feature-list">
+                        <li>Wagtail CMS implementation</li>
+                        <li>Custom content models</li>
+                        <li>SEO optimization</li>
+                        <li>Multi-language support</li>
+                        <li>Media management</li>
+                    </ul>
+                    <button class="btn btn-outline-success w-100 mt-3">Learn More →</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Process Section -->
+    <div class="row mt-5 pt-4">
+        <div class="col-12">
+            <h2 class="text-center mb-5">Our Development Process</h2>
+        </div>
+        <div class="col-md-3">
+            <div class="process-step">
+                <div class="step-number">1</div>
+                <h5>Discovery</h5>
+                <p>Understand requirements, goals, and technical specifications</p>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="process-step">
+                <div class="step-number">2</div>
+                <h5>Planning</h5>
+                <p>Architecture design, tech stack selection, and timeline creation</p>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="process-step">
+                <div class="step-number">3</div>
+                <h5>Development</h5>
+                <p>Agile sprints with regular demos and feedback integration</p>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="process-step">
+                <div class="step-number">4</div>
+                <h5>Launch & Support</h5>
+                <p>Deployment, testing, and ongoing maintenance</p>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Testimonials -->
+    <div class="row mt-5">
+        <div class="col-12">
+            <h2 class="text-center mb-4">What Our Clients Say</h2>
+        </div>
+        <div class="col-md-4">
+            <div class="testimonial-card">
+                <div class="testimonial-text">"Django helped us launch our MVP in just 6 weeks. The built-in admin panel saved us months of development time!"</div>
+                <div class="testimonial-author">— Sarah Chen, Startup Founder</div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="testimonial-card">
+                <div class="testimonial-text">"Their API development service was outstanding. We now handle 1M+ requests daily with zero downtime."</div>
+                <div class="testimonial-author">— Michael Rodriguez, CTO</div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="testimonial-card">
+                <div class="testimonial-text">"The maintenance package keeps our legacy Django app secure and performant. Highly recommend!"</div>
+                <div class="testimonial-author">— Emily Watson, Product Manager</div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- CTA Section -->
+    <div class="row mt-5 mb-5">
+        <div class="col-12">
+            <div class="alert alert-success text-center">
+                <h4 class="mb-3">Ready to start your Django project?</h4>
+                <p>Contact us today for a free consultation and project estimate</p>
+                <a href="/contact" class="btn btn-success btn-lg mt-2">Get in Touch →</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock body %}
